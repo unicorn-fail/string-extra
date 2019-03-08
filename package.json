@@ -1,0 +1,81 @@
+{
+  "name": "@unicorn-fail/string-extra",
+  "version": "1.0.0",
+  "description": "Extends string.js with extra functionality, like chalk and sprintf support.",
+  "main": "index.js",
+  "engines": {
+    "node": ">=8.6.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unicorn-fail/string-extra.git"
+  },
+  "keywords": [
+    "S",
+    "s",
+    "str",
+    "string",
+    "strings",
+    "string.js",
+    "stringjs",
+    "csv",
+    "html",
+    "entities",
+    "parse",
+    "html",
+    "tags",
+    "strip",
+    "trim",
+    "encode",
+    "decode",
+    "escape",
+    "unescape",
+    "chalk",
+    "color",
+    "colour",
+    "colors",
+    "terminal",
+    "console",
+    "cli",
+    "ansi",
+    "style",
+    "styles",
+    "tty",
+    "format",
+    "formatting",
+    "rgb",
+    "256",
+    "shell",
+    "xterm",
+    "log",
+    "logging",
+    "command-line",
+    "text",
+    "printf",
+    "sprintf",
+    "vprintf",
+    "template",
+    "templates"
+  ],
+  "author": "Mark Carver",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/unicorn-fail/string-extra/issues"
+  },
+  "homepage": "https://github.com/unicorn-fail/string-extra#readme",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "chalk-pipe": "^2.0.0",
+    "sprintf-js": "^1.1.2",
+    "string": "^3.3.3"
+  },
+  "devDependencies": {
+    "mocha": "^6.0.2"
+  },
+  "directories": {
+    "test": "test"
+  }
+}

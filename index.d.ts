@@ -16,55 +16,55 @@ export interface StringExtraConfig {
 
 export interface StringExtraChalk {
     // Modifiers.
-    readonly reset: this;
-    readonly bold: this;
-    readonly dim: this;
-    readonly italic: this;
-    readonly underline: this;
-    readonly inverse: this;
-    readonly hidden: this;
-    readonly strikethrough: this;
+    readonly reset: StringExtra;
+    readonly bold: StringExtra;
+    readonly dim: StringExtra;
+    readonly italic: StringExtra;
+    readonly underline: StringExtra;
+    readonly inverse: StringExtra;
+    readonly hidden: StringExtra;
+    readonly strikethrough: StringExtra;
 
     // Foreground.
-    readonly black: this;
-    readonly red: this;
-    readonly green: this;
-    readonly yellow: this;
-    readonly blue: this;
-    readonly magenta: this;
-    readonly cyan: this;
-    readonly white: this;
-    readonly gray: this;
-    readonly grey: this;
+    readonly black: StringExtra;
+    readonly red: StringExtra;
+    readonly green: StringExtra;
+    readonly yellow: StringExtra;
+    readonly blue: StringExtra;
+    readonly magenta: StringExtra;
+    readonly cyan: StringExtra;
+    readonly white: StringExtra;
+    readonly gray: StringExtra;
+    readonly grey: StringExtra;
     // The "blackBright" style doesn't actually exist currently.
     // @see https://github.com/chalk/ansi-styles/issues/48
     // @see https://github.com/chalk/chalk/issues/257
-    // readonly blackBright: this;
-    readonly redBright: this;
-    readonly greenBright: this;
-    readonly yellowBright: this;
-    readonly blueBright: this;
-    readonly magentaBright: this;
-    readonly cyanBright: this;
-    readonly whiteBright: this;
+    // readonly blackBright: StringExtra;
+    readonly redBright: StringExtra;
+    readonly greenBright: StringExtra;
+    readonly yellowBright: StringExtra;
+    readonly blueBright: StringExtra;
+    readonly magentaBright: StringExtra;
+    readonly cyanBright: StringExtra;
+    readonly whiteBright: StringExtra;
 
     // Background.
-    readonly bgBlack: this;
-    readonly bgRed: this;
-    readonly bgGreen: this;
-    readonly bgYellow: this;
-    readonly bgBlue: this;
-    readonly bgMagenta: this;
-    readonly bgCyan: this;
-    readonly bgWhite: this;
-    readonly bgBlackBright: this;
-    readonly bgRedBright: this;
-    readonly bgGreenBright: this;
-    readonly bgYellowBright: this;
-    readonly bgBlueBright: this;
-    readonly bgMagentaBright: this;
-    readonly bgCyanBright: this;
-    readonly bgWhiteBright: this;
+    readonly bgBlack: StringExtra;
+    readonly bgRed: StringExtra;
+    readonly bgGreen: StringExtra;
+    readonly bgYellow: StringExtra;
+    readonly bgBlue: StringExtra;
+    readonly bgMagenta: StringExtra;
+    readonly bgCyan: StringExtra;
+    readonly bgWhite: StringExtra;
+    readonly bgBlackBright: StringExtra;
+    readonly bgRedBright: StringExtra;
+    readonly bgGreenBright: StringExtra;
+    readonly bgYellowBright: StringExtra;
+    readonly bgBlueBright: StringExtra;
+    readonly bgMagentaBright: StringExtra;
+    readonly bgCyanBright: StringExtra;
+    readonly bgWhiteBright: StringExtra;
 }
 
 export interface StringExtraConstructor extends StringJsConstructor {
@@ -85,25 +85,25 @@ export interface StringExtraConstructor extends StringJsConstructor {
 
 export interface StringExtra extends StringExtraChalk, StringJs {
 
-    args: this
+    args: StringExtra
 
-    resetStyle: this
+    resetStyle: StringExtra
 
     (value?:any, ...args:any[]): StringExtra;
 
     constructor: StringExtraConstructor;
 
-    config(name?:string, value?:any): this|any
+    config(name?:string, value?:any): StringExtra|any
 
-    inline(inline?:boolean): this
+    inline(inline?:boolean): StringExtra
 
-    prefix(value:StringLike, delimiter?: StringLike): this
+    prefix(value:StringLike, delimiter?: StringLike): StringExtra
 
-    style(style:ChalkLike, reset?:boolean): this
+    style(style:ChalkLike, reset?:boolean): StringExtra
 
-    suffix(value:StringLike, delimiter?: StringLike): this
+    suffix(value:StringLike, delimiter?: StringLike): StringExtra
 
-    resetFormatted(): this
+    resetFormatted(): StringExtra
 
 }
 

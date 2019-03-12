@@ -76,6 +76,10 @@
   "devDependencies": {
     "mocha": "^6.0.2"
   },
+  "optionalDependencies": {
+    "html-entities": "^1.2.1",
+    "latinize": "^0.4.0"
+  },
   "directories": {
     "test": "test"
   }

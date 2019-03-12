@@ -57,11 +57,12 @@ const chalk = Object.assign({
     'bgCyanBright',
     'bgWhiteBright',
   ],
+  styleDelimiter: '>>><<<',
   styleEnd(style) {
-    return style ? style('>>><<<').split('>>><<<')[1] : '';
+    return style ? style(this.styleDelimiter).split(this.styleDelimiter)[1] : '';
   },
   styleStart(style) {
-    return style ? style('>>><<<').split('>>><<<')[0] : '';
+    return style ? style(this.styleDelimiter).split(this.styleDelimiter)[0] : '';
   },
   wrap(value, existingStyle) {
     const reset = existingStyle ? this.styleStart(Chalk.reset) : '';

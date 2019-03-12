@@ -1,12 +1,22 @@
 export interface StringJsConstructor {
-    new (value:any): StringJs;
+    new (value:any): StringJs
+
+    ENTITIES: Object
+
+    TMPL_CLOSE: string
+    TMPL_OPEN: string
+
+    VERSION:string
+
+    extendPrototype()
+    restorePrototype()
 }
 
 export interface StringJs extends String {
 
-    (value: any): this;
+    (value: any): this
 
-    constructor: StringJsConstructor;
+    constructor: StringJsConstructor
 
     s: string
 
@@ -114,6 +124,6 @@ export interface StringJs extends String {
 
 }
 
-declare function StringJsFactory(value:any): StringJs;
+declare function StringJsFactory(value:any): StringJs
 
-export default StringJs;
+export default StringJs

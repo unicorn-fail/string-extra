@@ -26,6 +26,12 @@ describe('StringExtra', function() {
     assert.stringExtra(actual, test);
   });
 
+  it('should allow the short hand sprintf array format', function() {
+    const actual = S([format, test]);
+    const expected = format.replace('%s', C.bold.whiteBright(test));
+    assert.stringExtra(actual, expected);
+  });
+
 });
 
 describe('StringExtra#chalk', function() {

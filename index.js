@@ -223,13 +223,14 @@ class StringExtra extends StringJsConstructor {
     // that converts to a string using toString(). It must also contain greater
     // than or equal subsequent placeholder values in the array to match the
     // corresponding placeholders in the string.
-    let placeholders;
-    let string = Array.isArray(value) && (placeholders = this.extractPlaceholders(value)).length ? value[0] : value;
-    if (!placeholders) {
-      placeholders = StringExtra.extractPlaceholders(string);
+    let string = value;
+    let placeholders = this.extractPlaceholders(value);
+    if (Array.isArray(value) && placeholders.length) {
+      string = value[0];
+      args = args.concat(value.slice(1));
     }
 
-    if (typeof value === 'string' && args.length) {
+    if (typeof string === 'string' && args.length && args.length >= placeholders.length) {
       // If there's a chalk style applied to the whole string, then closing
       // this argument will remove it from the string. The beginning style of
       // the original chalk style needs to be appended.

@@ -14,7 +14,7 @@ export type ChalkLike = string|Chalk|Function
 export type StringLike = ''|string|String|StringExtra|StringJs
 
 export interface StringExtraInspector {
-    (value:any, config:StringExtraConfig): StringLike
+    (value:any, options?:StringExtraOptions): StringLike
 }
 
 export interface StringExtraChalk {
@@ -77,59 +77,126 @@ export interface StringExtraChalk {
     readonly zebra: StringExtra
 }
 
-export interface StringExtraConfig {
+export interface StringExtraOptions {
     activeStyle: string
+    args: any[]
     argStyle: ChalkLike
     color: boolean
     encoding: string
     inspector: StringExtraInspector
-    inspectorConfig: Object
+    inspectorOptions: Object
     nullAsEmptyString: boolean
     prefix: StringLike
+    prefixDelimiter: StringLike
     style: ChalkLike
     styleSpaces: boolean
     suffix: StringLike
+    suffixDelimiter: StringLike
 }
 
-export interface StringExtraConstructor extends StringJsConstructor {
-    new (value:any, ...args:any[]): StringExtra
+export interface StringExtraStaticDeprecated {
+    /**
+     * @deprecated since 1.0.2. Use StringExtra.create instead.
+     */
+    S(value:any, ...args:any[]): StringExtra
+}
 
-    create(value:any, ...args:any[]): StringExtra
+export interface StringExtraConstructor extends StringExtraStaticDeprecated, StringJsConstructor {
+    new (value:any, options?:StringExtraOptions): StringExtra
 
-    extractPlaceholders(value:any): string[]
+    create(value:any, options?:StringExtraOptions): StringExtra
+
+    createRoot(value:any, options?:StringExtraOptions): StringExtra
+
+    cloneInstance(instance:StringLike|any): StringExtra
+
+    cloneRootInstance(instance:StringLike|any): StringExtra
+
+    deprecated(value:any, options?:StringExtraOptions): StringExtra
 
     escapeRegExp(string:string): string
-
-    format(value:any, args:any[], config:{}): string
 
     hookStream(...streams:(WritableStream|NodeJS.WriteStream)[]): void
 
     unhookStream(...streams:(WritableStream|NodeJS.WriteStream)[]): void
 
-    defaultConfig: StringExtraConfig
+    defaultOptions: StringExtraOptions
+
+    defaultStyles: {[key: string]: string[]}
+
+    inspectProperties: Symbol
 
     sprintfPlaceholders: RegExp
+
+    StringExtra: StringExtra
+
+    StringJs: StringJs
 }
 
-export interface StringExtra extends StringExtraChalk, StringJs {
+export interface StringExtraDeprecated {
+    /**
+     * @deprecated Use appropriate setter/getter option methods instead.
+     */
+    config(name?:string, value?:any): StringExtra|any
 
-    argStyle: StringExtra
+    /**
+     * @deprecated Use appropriate setter/getter option methods instead.
+     */
+    config(option?:StringExtraOptions): StringExtra|any
 
-    b: Buffer
+    /**
+     * @deprecated Use appropriate setter/getter option methods instead.
+     */
+    option(name?:string, value?:any): StringExtra|any
 
-    resetStyle: StringExtra
+    /**
+     * @deprecated Use appropriate setter/getter option methods instead.
+     */
+    option(option?:StringExtraOptions): StringExtra|any
+
+}
+
+export interface StringExtra extends StringExtraDeprecated, StringExtraChalk, StringJs {
 
     (value?:any, ...args:any[]): StringExtra
 
     constructor: StringExtraConstructor
 
+    argStyle: StringExtra
+
+    b: Buffer
+
+    rawLength: number
+
+    resetStyle: StringExtra
+
     args(...args:any): StringExtra
 
-    config(name?:string, value?:any): StringExtra|any
+    attachCustomInspector(): void
 
-    config(config?:StringExtraConfig): StringExtra|any
+    clone(): StringExtra
+
+    cloneRoot(): StringExtra
+
+    customInspector(): string
+
+    extractPlaceholders(value:any): string[]
+
+    format(value:any, args:any[], options:{}): string
+
+    formatTheme(value:string, theme:ChalkLike[]): string
+
+    getOption(name:string):any
+
+    getOptions(): StringExtraOptions
+
+    inspect(): StringExtra
 
     prefix(value:StringLike, delimiter?: StringLike): StringExtra
+
+    setOption(name:string, value:any): StringExtra
+
+    setOptions(options:StringExtraOptions): StringExtra
 
     style(style:ChalkLike, reset?:boolean): StringExtra
 

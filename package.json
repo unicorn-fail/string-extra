@@ -4,6 +4,13 @@
   "description": "Extends string.js with extra functionality, like chalk and sprintf support.",
   "main": "index.js",
   "types": "index.d.ts",
+  "files": [
+    "chalk.js",
+    "examples.js",
+    "index.js",
+    "index.d.ts",
+    "string.d.ts"
+  ],
   "engines": {
     "node": ">=8.6.0"
   },

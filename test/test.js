@@ -7,7 +7,7 @@ const C = chalk.native;
 const test = 'test';
 const format = 'Test %s';
 
-const { S, StringExtra } = require('../index.js');
+const { create:S, StringExtra } = require('../index.js');
 
 assert.stringExtra = (actual, expected) => {
   assert.strictEqual(actual instanceof StringExtra, true);
@@ -90,6 +90,13 @@ describe('StringExtra.style', function() {
     assert.stringExtra(actual, expected);
   });
 
+  it('should return lengths with and without ansi codes', function() {
+    const actual = S(test).red;
+    assert.stringExtra(actual);
+    assert.strictEqual(actual.length, test.length);
+    assert.strictEqual(actual.rawLength, C.red(test).length);
+  });
+
   it('should throw an error when provided style is invalid', function() {
     const actual = S(test);
     const expected = new TypeError('Provided style must either be a string of chalk styles, piped using dot notation or a function that will be passed a single string value.');
@@ -112,6 +119,24 @@ describe('StringExtra.prefix', function() {
     assert.stringExtra(actual, expected);
   });
 
+  it('should return a double prefixed string', function() {
+    const actual = S(test).prefix('prefix').prefix(S('prefix').red.bold.underline);
+    const expected = `${C.red.bold.underline('prefix')} prefix ${test}`;
+    assert.stringExtra(actual, expected);
+  });
+
+  it('should return a prefixed string with a custom delimiter', function() {
+    const actual = S(test).prefix('prefix').setOption('prefixDelimiter', '-');
+    const expected = `prefix-${test}`;
+    assert.stringExtra(actual, expected);
+  });
+
+  it('should return a prefixed string with a custom styled delimiter', function() {
+    const actual = S(test).prefix('prefix').setOption('prefixDelimiter', S('-').red.bold.underline);
+    const expected = `prefix${C.red.bold.underline('-')}${test}`;
+    assert.stringExtra(actual, expected);
+  });
+
 });
 
 describe('StringExtra.suffix', function() {
@@ -128,14 +153,32 @@ describe('StringExtra.suffix', function() {
     assert.stringExtra(actual, expected);
   });
 
+  it('should return a double suffixed string', function() {
+    const actual = S(test).suffix('suffix').suffix(S('suffix').red.bold.underline);
+    const expected = `${test} suffix ${C.red.bold.underline('suffix')}`;
+    assert.stringExtra(actual, expected);
+  });
+
+  it('should return a suffixed string with a custom delimiter', function() {
+    const actual = S(test).suffix('suffix').setOption('suffixDelimiter', '-');
+    const expected = `${test}-suffix`;
+    assert.stringExtra(actual, expected);
+  });
+
+  it('should return a suffixed string with a custom styled delimiter', function() {
+    const actual = S(test).suffix('suffix').setOption('suffixDelimiter', S('-').red.bold.underline);
+    const expected = `${test}${C.red.bold.underline('-')}suffix`;
+    assert.stringExtra(actual, expected);
+  });
+
 });
 
-// describe('StringExtra.args', function() {
-//
-//   it('should set active styling to args', function() {
-//     const actual = S(format, test).magenta.argStyle.cyanBright.bold.underline;
-//     const expected = C.magenta(`Test ${chalk.wrap(C.cyanBright.bold.underline(test), C.magenta)}`);
-//     assert.stringExtra(actual, expected);
-//   });
-//
-// });
+describe('StringExtra.args', function() {
+
+  it('should set active styling to args', function() {
+    const actual = S([format, test]).magenta.argStyle.cyanBright.bold.underline;
+    const expected = C.magenta(format).replace('%s', chalk.wrap(C.cyanBright.bold.underline(test), C.magenta));
+    assert.stringExtra(actual, expected);
+  });
+
+});
